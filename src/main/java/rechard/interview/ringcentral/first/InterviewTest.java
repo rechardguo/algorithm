@@ -1,4 +1,4 @@
-package rechard.learn.algorithm;
+package rechard.interview.ringcentral.first;
 
 /**
  * 
