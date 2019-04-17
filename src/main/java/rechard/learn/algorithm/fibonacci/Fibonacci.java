@@ -24,14 +24,14 @@ public class Fibonacci {
         else
             return f1(i-1)+f1(i-2);
     }
-   //动态规划算法1，使用一个数组保存了已经计算过的值，这样就不用重新算了，避免了递归算法的缺点
+    //动态规划算法1，使用一个数组保存了已经计算过的值，这样就不用重新算了，避免了递归算法的缺点
     public static int f2(int i){
         if(i<=0)
             return 0;
         else {
             int p[] = new int[i + 1];
             for (int x = 1; x <=i; x++) {
-               f2_0(p,x);
+                f2_0(p,x);
             }
             return p[i];
         }
@@ -39,11 +39,11 @@ public class Fibonacci {
     private  static int f2_0(int[] p,int i){
         if(p[i]!=0)
             return p[i];
-        else if(i<3)
+        else if(i<2)//i=1,i=2
             p[i]=1;
         else
             p[i]=p[i-1]+p[i-2];
-            return p[i];
+        return p[i];
     }
     //动态规划算法2，如果传入的i,
     // f(i-2)=f(x)
@@ -53,21 +53,16 @@ public class Fibonacci {
     public static int f3(int i){
         if(i<=0)
             return 0;
-        else if(i<3)
-            return 1;
-        else {
-            int x_value = 1;
-            int y_value = 1;
-            int temp = x_value;
-            for(int z=2;z<i;z++){
-                x_value=y_value;
-                y_value+=temp;
-                temp=x_value;
-            }
-            return y_value;
+
+        int x_value = 0;
+        int y_value = 1;
+        int temp = x_value;
+        for(int z=2;z<i;z++){
+            x_value=y_value;
+            y_value+=temp;
+            temp=x_value;
         }
-
-
+        return y_value;
     }
 
 }

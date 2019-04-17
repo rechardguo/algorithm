@@ -11,9 +11,9 @@ public class Test2 {
 
 	private static int calIndexNum(int[] numArr, int index) {
 		if(index<=0)
-			throw new RuntimeException("index can not be negative");
+			throw new IllegalArgumentException("index can not be negative");
 		if(index>numArr.length)
-			throw new RuntimeException("index can not be lager than numArr length");
+			throw new IllegalArgumentException("index can not be lager than numArr length");
 		int count = 1;
 		int sum = 0;
 		while(sum<index){
