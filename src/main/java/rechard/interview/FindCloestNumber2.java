@@ -8,6 +8,7 @@ import java.util.List;
  * 在一个有序数组中找到target的begin和end
  * 例如  1,3,3,3,3,3,8 ，target=3 则返回 1,5
  *
+ * O(logn)
  */
 public class FindCloestNumber2 {
 
