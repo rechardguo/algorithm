@@ -12,7 +12,7 @@ public class PalindromeNumber {
      * @param x
      * @return
      */
-    public static  boolean isPalindrome(int x) {
+    public static  boolean isPalindrome_error(int x) {
         //if(x<11) //假定负数和个位数不是回文
         //  return false;
         if(x<0)return false;
@@ -28,6 +28,18 @@ public class PalindromeNumber {
             index++;
         }
         return true;
+    }
+
+    //这里不需要考虑到溢出，因为不会发生溢出
+    public static boolean isPalindrome(int x) {
+        if(x<0)return false;
+        int  r=0;
+        int tmp=x;
+        while(tmp!=0){
+            r=r*10+tmp%10;
+            tmp/=10;
+        }
+        return r==x;
     }
 
     //摘抄于网上,这个不符合题目 If you are thinking of converting the integer to string, note the restriction of using extra space.
