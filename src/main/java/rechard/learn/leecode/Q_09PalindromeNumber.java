@@ -31,7 +31,7 @@ public class Q_09PalindromeNumber {
     }
 
     //这里不需要考虑到溢出，因为不会发生溢出
-    public static boolean isPalindrome(int x) {
+    public static boolean isPalindrome_1(int x) {
         if(x<0)return false;
         int  r=0;
         int tmp=x;
@@ -40,6 +40,21 @@ public class Q_09PalindromeNumber {
             tmp/=10;
         }
         return r==x;
+    }
+
+    //比isPalindrome_1更优秀
+    //比一半
+    public static boolean isPalindrome(int x) {
+        if(x==0) return true;
+        //100,10,120 ，只要个位有0肯定不是回文串
+        if(x<0 || x%10==0)
+            return false;
+        int r=0;
+         while(r<x){
+             r=r*10+x%10;
+             x/=10;
+         }
+         return (r==x||r/10==x);
     }
 
     //摘抄于网上,这个不符合题目 If you are thinking of converting the integer to string, note the restriction of using extra space.
