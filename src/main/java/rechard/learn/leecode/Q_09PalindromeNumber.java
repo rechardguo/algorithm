@@ -1,7 +1,7 @@
 package rechard.learn.leecode;
 
 //判断数字是否位回文
-public class PalindromeNumber {
+public class Q_09PalindromeNumber {
 
     /**
      * 思路：通过取数字的高位和地位
