@@ -1,7 +1,23 @@
 package rechard.learn.leecode;
 
 /**
+ *思路是：
  *
+ * 假设
+ * haystack：abcabeabcabc
+ * needle：abcabc
+ *
+ * 第一次比较i=0
+ * 发现abcabc比较到haystack的0-5最后的e不匹配
+ * 正常的做法是i=1,在进行abcabc比较到haystack的1-6的比较。
+ *
+ * 优化的做法
+ * haystack[i]必须是a开始才有机会去匹配needle,按照这个想法，在i=0的比较过程中可以记录下是否有和a相同的字符出现过，
+ * 有的话就记录到movestep.
+ *
+ * 例如上面的比较i=0，发现不匹配的话
+ * i可以直接跳到3的位置，省去2步。
+ * 这个做法就是moveStep的逻辑，也就是看下头字符在比较过程中是否
  */
 public class Q_28strStr {
     public int strStr(String haystack, String needle) {
