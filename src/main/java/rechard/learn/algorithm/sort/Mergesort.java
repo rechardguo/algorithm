@@ -17,14 +17,15 @@ public class Mergesort {
 	public static void sort(int[] arr){
 		if(arr==null)
 			return;
-		sort(arr,0,arr.length-1,new int[arr.length]);
+		sort(arr,0,arr.length-1);
 	}
 	
-	private static  void sort(int[] arr,int first,int last,int[] newarr){
+	private static  void sort(int[] arr,int first,int last){
 		if(first<last){
-			sort(arr,first,(first+last)/2,newarr);
-			sort(arr,(first+last)/2+1,last,newarr);
-			megerArray(arr,first,last,newarr);
+			int mid=first+(last-first>>1);
+			sort(arr,first,mid);
+			sort(arr,mid+1,last);
+			megerArray(arr,first,mid,last);
 		}
 	}
 	/**1.合并
@@ -33,30 +34,30 @@ public class Mergesort {
 		  到newarr
 	   2.将newarr里的有序数组换回到arr里	  
 	**/
-	private static void megerArray(int[]arr,int first,int last,int[]newarr){		
+	private static void megerArray(int[]arr,int first,int mid,int last){
 		int i=first;
-		int mid=(first+last)/2;
-		int n=mid+1;
+		int j=mid+1;
 		int k=0;
-		while(i<=mid && n<=last){
-			if(arr[i]<arr[n]){
-				newarr[k++]=arr[i++];
+		int[] tmpArr=new int[last-first+1]; //  new 出1个临时数组，长度是last-first+1
+		while(i<=mid && j<=last){
+			if(arr[i]<arr[j]){
+				tmpArr[k++]=arr[i++];
 			}else{
-				newarr[k++]=arr[n++];
+				tmpArr[k++]=arr[j++];
 			}
 		}
 		while(i<=mid)
-			newarr[k++]=arr[i++];
-		
-		while(n<=last)
-			newarr[k++]=arr[n++];
-		
-		//arr排序
+			tmpArr[k++]=arr[i++];
+
+		while(j<=last)
+			tmpArr[k++]=arr[j++];
+
+		//将排序号的临时数组拷贝回去
 		for(int y=0;y<k;y++){
-			arr[first+y]=newarr[y];
+			arr[first+y]=tmpArr[y];
 		}
-		
+
 	}
-	
+
 
 }

@@ -1,6 +1,6 @@
 package rechard.learn.leecode;
 
-import rechard.learn.algorithm.datastructure.ListNode;
+import rechard.learn.leecode.datastructure.ListNode;
 
 import java.io.IOException;
 

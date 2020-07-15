@@ -1,6 +1,7 @@
 package rechard.learn.leecode;
 
-import rechard.learn.algorithm.datastructure.ListNode;
+
+import rechard.learn.leecode.datastructure.ListNode;
 
 /**
  * 移除链表里的某个节点，对比Q_27

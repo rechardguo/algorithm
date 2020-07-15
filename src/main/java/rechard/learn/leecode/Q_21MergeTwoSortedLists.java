@@ -1,6 +1,7 @@
 package rechard.learn.leecode;
 
-import rechard.learn.algorithm.datastructure.ListNode;
+
+import rechard.learn.leecode.datastructure.ListNode;
 
 public class Q_21MergeTwoSortedLists {
     public ListNode mergeTwoLists(ListNode l1, ListNode l2) {

@@ -1,6 +1,5 @@
 package rechard.learn.leecode;
 
-import rechard.learn.algorithm.datastructure.ListNode;
 
 import java.io.IOException;
 
@@ -19,18 +18,23 @@ public class AddTwoNumbers_thinkabout_mergesort {
 
     public static int[] merge(int [] arr1,int []arr2){
         //其中一个数组为空，就返回另个数组
-        if(arr1==null) return  arr2;
-        if(arr2==null) return  arr1;
-        int l1=0 ,l2=0,index=0;
-        int[] result=new int[arr1.length+arr2.length];
-        while(l1<arr1.length||l2<arr2.length){
-            if(l1<arr1.length&&l2<arr2.length) {
-                result[index++] = arr1[l1] < arr2[l2] ? arr1[l1++] : arr2[l2++];
-            }else{
-                result[index++] = l1<arr1.length? arr1[l1++]: arr2[l2++];
+        if (arr1 != null) {
+            if (arr2 == null) {
+                return arr1;
             }
+            int l1 = 0, l2 = 0, index = 0;
+            int[] result = new int[arr1.length + arr2.length];
+            while (l1 < arr1.length || l2 < arr2.length) {
+                if (l1 < arr1.length && l2 < arr2.length) {
+                    result[index++] = arr1[l1] < arr2[l2] ? arr1[l1++] : arr2[l2++];
+                } else {
+                    result[index++] = l1 < arr1.length ? arr1[l1++] : arr2[l2++];
+                }
+            }
+            return result;
+        } else {
+            return arr2;
         }
-        return result;
     }
 
     public static void main(String[] args) {
