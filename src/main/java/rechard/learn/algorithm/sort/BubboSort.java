@@ -1,19 +1,21 @@
 package rechard.learn.algorithm.sort;
 
+import org.junit.Assert;
+import org.junit.Test;
+
 /**
  * 冒泡排序 O(N^2)
  */
 public class BubboSort {
 
-    public static void main(String[] args) {
-        int [] arr =SortUtil.generateArr(0);
-        for (int i=0;i<arr.length;i++){
-            System.out.println(arr[i]);
-        }
-        System.out.println("=============================");
-        sort(arr);
-        for (int i=0;i<arr.length;i++){
-            System.out.println(arr[i]);
+    @Test
+    public void check(){
+        for (int i = 0; i <10 ; i++) {
+            int[] arr = SortUtil.generateArr(i);
+            int[] arr2 = SortUtil.clone(arr);
+            sort(arr);
+            BinSort.sort(arr2);
+            Assert.assertArrayEquals(arr, arr2);
         }
     }
 

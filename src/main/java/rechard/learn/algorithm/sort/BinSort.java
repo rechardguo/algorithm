@@ -1,20 +1,23 @@
 package rechard.learn.algorithm.sort;
 
-import java.util.Random;
+import org.junit.Assert;
+import org.junit.Test;
 
 /**
  * 桶排序
  */
 public class BinSort {
 
-    public static void main(String[] args) {
-        int [] arr =Utils.generateArr(5);
-        int [] arr2 = arr;
-        sort(arr);
-        QuickSort.quickSort(arr2,0,arr2.length-1);
-        System.out.println(Utils.isEqual(arr,arr2));
+    @Test
+    public void check(){
+        for (int i = 0; i <10 ; i++) {
+            int[] arr = SortUtil.generateArr(i);
+            int[] arr2 = SortUtil.clone(arr);
+            sort(arr);
+            BubboSort.sort(arr2);
+            Assert.assertArrayEquals(arr, arr2);
+        }
     }
-
     public static void sort(int arr[]){
         if(arr==null || arr.length==0)
             return;
@@ -31,7 +34,7 @@ public class BinSort {
         int index=0;
         for(int i=0;i<buckets.length;i++){
             while(buckets[i]-->0){
-                arr[index++]=i;
+                arr[index++]=i+min;
             }
         }
     }
