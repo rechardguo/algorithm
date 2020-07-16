@@ -1,21 +1,21 @@
 package rechard.learn.algorithm.sort;
 
+import org.junit.Assert;
+import org.junit.Test;
+
 /**
  * 插入排序,O(N^2)
  */
 public class InsertSort {
 
-    public static void main(String[] args) {
+    @Test
+    public  void check() {
         for (int i=0;i<100;i++){
             int [] arr =SortUtil.generateArr(10);
             int [] arrCopy=SortUtil.clone(arr);
             sort(arr,0,arr.length);
             BubboSort.sort(arrCopy);
-            if(!SortUtil.isEqual(arr,arrCopy)){
-                SortUtil.print(arr);
-                SortUtil.print(arrCopy);
-                System.out.println("------------------------");
-            }
+            Assert.assertArrayEquals(arr,arrCopy);
         }
     }
     public static void sort(int arr[]){
@@ -24,7 +24,7 @@ public class InsertSort {
             int tmp=arr[i];
             while(j>=0&&arr[j]>tmp){
                 //左边0-j的部分是从小到大有序的
-                // tmp要招到0-j里那个index的值比tmp小，就插入到index+1
+                // tmp要找到0-j里那个index的值比tmp小，就插入到index+1
                 // 在此过程中不断的移动
                 arr[j+1]=arr[j];
                 j--;
