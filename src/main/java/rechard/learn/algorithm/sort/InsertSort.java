@@ -3,8 +3,16 @@ package rechard.learn.algorithm.sort;
 import org.junit.Assert;
 import org.junit.Test;
 
+
+
 /**
- * 插入排序,O(N^2)
+ * 插入排序
+ *
+ * 时间复杂度：O(N^2)
+ * 空间复杂度：O(N^2)
+ * @author Rechard
+ *
+ *
  */
 public class InsertSort {
 

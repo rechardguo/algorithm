@@ -5,6 +5,12 @@ import org.junit.Test;
 
 /**
  * 桶排序
+ *
+ * 时间复杂度：O(N)
+ * 空间复杂度：O(N)
+ * @author Rechard
+ *
+ *
  */
 public class BinSort {
 

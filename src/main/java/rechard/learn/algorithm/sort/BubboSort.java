@@ -4,13 +4,16 @@ import org.junit.Assert;
 import org.junit.Test;
 
 /**
- * 冒泡排序 O(N^2)
+ * 冒泡排序
+ * 时间复杂度：O(N^2)
+ * 空间复杂度：O(N^2)
+ * @author Rechard
  */
 public class BubboSort {
 
     @Test
     public void check(){
-        for (int i = 0; i <10 ; i++) {
+        for (int i = 0; i <100 ; i++) {
             int[] arr = SortUtil.generateArr(i);
             int[] arr2 = SortUtil.clone(arr);
             sort(arr);

@@ -1,89 +1,111 @@
 package rechard.learn.algorithm.sort;
 
-import java.util.Random;
+import org.junit.Assert;
+import org.junit.Test;
+
+/**
+ * 堆排序
+ *
+ *
+ * @author Rechard
+ *
+ *
+ */
 
 public class HeapSort {
-    //堆排序
-    public static  int[] sort(int[] arr) {
-        int[] arr2 = arr;
-        for (int i = 0; i < arr.length; i++) {
-            heapInsert(arr2, i,arr[i]);
+
+
+    @Test
+    public void check() {
+        for(int i=0;i<100;i++) {
+            int[] arr = SortUtil.generateArr(5);
+            int[] arr2 = SortUtil.clone(arr);
+            arr = sort(arr);
+            BubboSort.sort(arr2);
+            Assert.assertArrayEquals(arr, arr2);
         }
-        heapify(arr2);
-        return arr2;
     }
 
+    //堆排序
+    public static  int[] sort(int[] arr) {
 
-    private static void heapify(int[] arr2) {
-        int heapSize=arr2.length-1;
+        int[] newArr=new int[arr.length];
+        // 大根堆
+        for (int i = 0; i < arr.length; i++) {
+            heapInsert(newArr, i,arr[i]);
+        }
+        heapify(newArr);
+        return newArr;
+    }
+
+    /**
+     * arr 传入的是个大根堆
+     * 但不是有序的，需要进行排序，排序的步骤：
+     *
+     * 1. 将堆顶的元素和末尾的交换
+     *
+     * @param arr
+     */
+
+    private static void heapify(int[] arr) {
+        int heapSize=arr.length-1;
         while(heapSize>0) {
             int index=0;
-            swap(arr2,index,heapSize--);
+            swap(arr,index,heapSize--);
             while(index<heapSize) {
                 int left = 2 * index + 1;
                 int right = left + 1;
-               
-                int maxChildIndex = right;
-                if(left>heapSize-1)
-                   break;
-                else if(right>heapSize-1)
-                    maxChildIndex=left;
-                else
-                    maxChildIndex=arr2[left] > arr2[right] ? left : right;  
-              
-                if (arr2[maxChildIndex] > arr2[index]) {
-                    swap(arr2, maxChildIndex, index);
-                    index=maxChildIndex;
+
+                int maxChildIndex = left;
+                if(left>heapSize)
+                    break;
+                if(right<=heapSize)
+                    maxChildIndex=arr[left] > arr[right] ? left : right;
+
+                if (arr[maxChildIndex] > arr[index]) {
+                    swap(arr, maxChildIndex, index);
                 }
+                index=maxChildIndex;
             }
         }
     }
 
     //大根堆
-    private static void heapInsert(int[] arr2,int index, int value) {
-        arr2[index]=value;
-        int parent = arr2[(index-1)/2];
-        while(parent<value){
-            swap(arr2,index,(index-1)/2);
-            index=(index-1)/2;
-            parent=arr2[(index-1)/2];
+
+    /**
+     *  每次将元素插入到数组尾部，然后和它的父类比较，如果父类小于自己，则交换
+     *  直到根元素
+     * @param arr
+     * @param index
+     * @param value
+     */
+    private static void heapInsert(int[] arr,int index, int value) {
+        arr[index]=value;
+        if(index==0)return;
+        //借鉴了priorityqueue里的写法，找出父类的index
+        int parentIndex=(index-1)>>>1;
+        int parentValue = arr[parentIndex];
+        //如果父类小于自己则不断交换
+        while(parentValue<value){
+            //交换
+            swap(arr,index,parentIndex);
+            //交换完后将自己当成parentValue
+            //注意不要写成value=parentValue,因为parentValue没因为swap(arr,index,parentIndex)改变
+            value=arr[parentIndex];
+
+            //index变成parentIndex
+            index=parentIndex;
+            //parentIndex则需要改成改后的index的父类
+            parentIndex=(index-1)<0?0:(index-1)>>>1;
+            parentValue=arr[parentIndex];
         }
     }
-    
+
     private static void swap(int[] arr, int i, int j) {
         int tmp=arr[i];
         arr[i]=arr[j];
         arr[j]=tmp;
     }
 
-    public static void main(String[] args) {
-        int [] arr =generateArr(20);
-        int [] arr2 = arr;
-        QuickSort.quickSort(arr2,0,arr2.length-1);
-        int[] arr3 = sort(arr);
-        System.out.println(isEqual(arr2,arr3));
-    }
 
-    //判断两个数组是否相等
-    public static boolean isEqual(int[] arr1, int[] arr2) {
-        if((arr1 == null && arr2 != null) || (arr1 != null && arr2 == null))
-            return false;
-        if(arr1 == null && arr2 == null)
-            return true;
-        if(arr1.length != arr2.length)
-            return false;
-        for(int i = 0;i < arr1.length;i++) {
-            if(arr1[i] != arr2[i])
-                return false;
-        }
-        return true;
-    }
-
-    public  static int[] generateArr(int i){
-        int arr[] = new int[i];
-        Random r = new Random();
-        for(int j=1;j<i;j++)
-            arr[j]= r.nextInt(j*100);
-        return arr;
-    }
 }
