@@ -19,6 +19,8 @@ public class Mergesort2 {
 	}
 
 	private static int[] mergesort(int[] arr1,int[]arr2){
+		if(arr1==null) return arr2;
+		if(arr2==null) return arr1;
 		int i=0,j=0,k=0;
 		int[] tmpArr=new int[arr1.length+arr2.length];
 		while(i<arr1.length && j<arr2.length){
