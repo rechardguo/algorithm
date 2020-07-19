@@ -1,4 +1,8 @@
 package rechard.learn.algorithm.sort;
+
+import org.junit.Assert;
+import org.junit.Test;
+
 /**
  * 归并排序算法
  * @author Rechard
@@ -6,11 +10,14 @@ package rechard.learn.algorithm.sort;
  */
 public class Mergesort {
 
-	public static void main(String[] args) {
-		int[] arr = new int[]{9,3,7,2,8,5,1,6};
-		sort(arr);
-		for (int i = 0; i < arr.length; i++) {
-			System.out.println(arr[i]);
+	@Test
+	public  void check() {
+		for (int i=0;i<100;i++){
+			int [] arr =SortUtil.generateArr(i);
+			int [] arrCopy=SortUtil.clone(arr);
+			sort(arr);
+			BubboSort.sort(arrCopy);
+			Assert.assertArrayEquals(arr,arrCopy);
 		}
 	}
 	
@@ -22,8 +29,11 @@ public class Mergesort {
 	
 	private static  void sort(int[] arr,int first,int last){
 		if(first<last){
-			int mid=first+(last-first>>1);
+			//first+last>>2 容易发生溢出
+			int mid=first+((last-first)>>>1);
+			//sort左边
 			sort(arr,first,mid);
+			//sort右边
 			sort(arr,mid+1,last);
 			megerArray(arr,first,mid,last);
 		}
