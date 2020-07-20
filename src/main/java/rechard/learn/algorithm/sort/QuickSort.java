@@ -1,5 +1,8 @@
 package rechard.learn.algorithm.sort;
 
+import org.junit.Assert;
+import org.junit.Test;
+
 import java.util.Random;
 
 /**
@@ -14,15 +17,17 @@ import java.util.Random;
  */
 public class QuickSort {
 
-	public static void main(String[]args){
-		
-	//	int[] arr = new int[]{20,15,32,66,33,-4,-9,-100,100,-1,10,4,5,8,4,4};
-       // int[] arr2 = new int[]{20,15,32,66,33,-4,-9,-100,100,-1,10,4,5,8,4,4};
-        int [] arr =SortUtil.generateArr(166);
-        int [] arr2 = arr;
-		quickSort(arr,0,arr.length-1);
-        quickSort2(arr2,0,arr2.length-1);
-        System.out.println(SortUtil.isEqual(arr,arr2));
+	@Test
+	public  void check(){
+		for(int i=0;i<100;i++) {
+			//	int[] arr = new int[]{20,15,32,66,33,-4,-9,-100,100,-1,10,4,5,8,4,4};
+			// int[] arr2 = new int[]{20,15,32,66,33,-4,-9,-100,100,-1,10,4,5,8,4,4};
+			int[] arr = SortUtil.generateArr(i);
+			int[] arr2 = SortUtil.clone(arr);
+			quickSort(arr, 0, arr.length - 1);
+			quickSort2(arr2, 0, arr2.length - 1);
+			Assert.assertArrayEquals(arr, arr2);
+		}
 	}
 
 	 public static void quickSort2(int arr[],int low,int high){

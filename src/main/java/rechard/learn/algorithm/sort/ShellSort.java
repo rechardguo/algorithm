@@ -1,17 +1,17 @@
 package rechard.learn.algorithm.sort;
 
+import org.junit.Assert;
+import org.junit.Test;
+
 public class ShellSort {
-	public static void main(String[] args) {
-		for (int i=0;i<300;i++){
-			int [] arr =SortUtil.generateArr(10);
-			int [] arrCopy=SortUtil.clone(arr);
+	@Test
+	public  void check(){
+		for(int i=0;i<100;i++) {
+			int[] arr = SortUtil.generateArr(i);
+			int[] arr2 = SortUtil.clone(arr);
 			sort(arr);
-			BubboSort.sort(arrCopy);
-			if(!SortUtil.isEqual(arr,arrCopy)){
-				SortUtil.print(arr);
-				SortUtil.print(arrCopy);
-				System.out.println("------------------------");
-			}
+			BubboSort.sort(arr2);
+			Assert.assertArrayEquals(arr, arr2);
 		}
 	}
 	public static  void sort(int[] arr){
@@ -20,15 +20,10 @@ public class ShellSort {
 				int j=i;
 				while(j>=gap){
 					if(arr[j]<arr[j-gap])
-						swap(arr,j,j-gap);
+						SortUtil.swap(arr,j,j-gap);
 					j-=gap;
 				}
 			}
 		}
-	}
-	private static void swap(int[] arr, int i, int j) {
-		arr[i]=arr[i]+arr[j];
-		arr[j]=arr[i]-arr[j];
-		arr[i]=arr[i]-arr[j];
 	}
 }

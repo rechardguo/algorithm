@@ -45,4 +45,11 @@ public class SortUtil {
         System.arraycopy(arr,0,dest,0,arr.length);
         return dest;
     }
+
+
+    public static void swap(int[] arr, int i, int j) {
+        int tmp=arr[i];
+        arr[i]=arr[j];
+        arr[j]=tmp;
+    }
 }

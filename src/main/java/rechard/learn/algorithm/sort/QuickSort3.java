@@ -20,7 +20,7 @@ public class QuickSort3 {
 	@Test
 	public  void check(){
 		for(int i=0;i<100;i++) {
-			int[] arr = SortUtil.generateArr(5);
+			int[] arr = SortUtil.generateArr(i);
 			int[] arr2 = SortUtil.clone(arr);
 			sort(arr,0,arr.length-1);
 			BubboSort.sort(arr2);
