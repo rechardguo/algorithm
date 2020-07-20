@@ -1,31 +1,40 @@
 package rechard.learn.algorithm.search;
 
+import org.junit.Test;
+import junitparams.JUnitParamsRunner;
+import junitparams.Parameters;
+import org.junit.runner.RunWith;
+
+import static org.junit.Assert.assertEquals;
+
 /**
- * 二分查找的原理就是夹逼算法
+ * 二分查找的算法
+ * 基本模式
  * @author Rechard
  *
  */
 public class BinarySearch {
-
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		int [] arr = new int[]{1,2,3,4,5,6};
-		System.out.println(binarysearch(arr,6));
+	@Test
+	public  void check() {
+		int[] arr=new int[]{1,4,5,6,7,8};
+		assertEquals(2, binarysearch(arr,5));
+		assertEquals(0, binarysearch(arr,1));
+		assertEquals(5, binarysearch(arr,8));
+		assertEquals(-1, binarysearch(arr,9));
 	}
-	
 	public static int binarysearch(int []arr ,int val){
 		if(arr==null || arr.length==0)
 			return -1;
 		int begin=0;
 		int end=arr.length-1;
 		while(begin<=end){
-			int index = begin+(end-begin)/2;
-			if(arr[index]>val){
-				end = index-1;
-			}else if(arr[index]<val){
-				begin = index+1;
+			int mid = begin+(end-begin>>1);
+			if(arr[mid]>val){
+				end = mid-1;
+			}else if(arr[mid]<val){
+				begin = mid+1;
 			}else{
-				return index;
+				return mid;
 			}
 		}
 		return -1;
