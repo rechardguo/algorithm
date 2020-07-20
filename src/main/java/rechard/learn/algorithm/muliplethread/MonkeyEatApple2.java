@@ -2,7 +2,16 @@ package rechard.learn.algorithm.muliplethread;
 
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
-
+/**
+ * 总共有n个苹果
+ * 猴子拿苹果，
+ * 猴子1 每次拿2个，如果不足则停止拿苹果
+ * 猴子2 每次拿3个，如果不足则停止拿苹果
+ *
+ * 程序模拟该过程，主要是多线程的同步
+ *
+ * 该例子使用ReentrantLock
+ */
 public class MonkeyEatApple2 {
 
     public static  class ApplePool{

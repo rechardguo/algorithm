@@ -1,7 +1,16 @@
 package rechard.learn.algorithm.muliplethread;
 
 import java.util.concurrent.atomic.AtomicInteger;
-
+/**
+ * 总共有n个苹果
+ * 猴子拿苹果，
+ * 猴子1 每次拿2个，如果不足则停止拿苹果
+ * 猴子2 每次拿3个，如果不足则停止拿苹果
+ *
+ * 程序模拟该过程，主要是多线程的同步
+ *
+ * 该例子使用AtomicInteger
+ */
 public class MonkeyEatApple3 {
 
     public static  class ApplePool{
