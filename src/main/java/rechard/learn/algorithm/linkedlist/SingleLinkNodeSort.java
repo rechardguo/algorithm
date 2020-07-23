@@ -1,107 +1,87 @@
 package rechard.learn.algorithm.linkedlist;
 
-import rechard.learn.algorithm.SingleLinkNode;
+import org.junit.Assert;
+import org.junit.Test;
+import rechard.learn.algorithm.sort.SortUtil;
+import rechard.learn.leecode.datastructure.ListNode;
 
-import java.util.Random;
+import java.util.LinkedList;
 
 /**
  * 单链表的排序
+ *
+ * 归并排序时间复杂度
+ * O(nlog2n)
+ *
+ *
+ * 归并排序 是O(n)
+ * // 1      3     5    2    4
+ * // head         slow
+ *
+ * o(n) + 2*o(n/2) + 4*o(n/4)
+ *
+ * o(n*log2n)
+ *
  */
 public class SingleLinkNodeSort {
-    public static SingleLinkNode randomLinkSort() {
-        Random r = new Random();
-        SingleLinkNode head = new SingleLinkNode(r.nextInt(100));
-        SingleLinkNode node = head;
-        for (int i = 0; i < 5; i++) {
-            node = node.next = new SingleLinkNode(r.nextInt(100));
-        }
-        return head;
-    }
 
-    public static void print(SingleLinkNode h) {
-        SingleLinkNode n = h;
-        while (n != null) {
-            System.out.print(n.val + ",");
-            n = n.next;
-        }
-        System.out.println("");
-    }
 
-    public static void main(String[] args) {
-        SingleLinkNode n = randomLinkSort();
-        print(n);
-        /*System.out.println("==========================");
-        SingleLinkNode sortedNode = insertSort(n);
-        print(sortedNode);*/
-        System.out.println("==========================");
-        SingleLinkNode sortedNode = quickSort(n);
-        print(sortedNode);
-    }
-
-    public static SingleLinkNode quickSort(SingleLinkNode node) {
-        SingleLinkNode tmp=node;
-        while(tmp!=null&&tmp.next!=null){
-            tmp=tmp.next;
-        }
-        return quickSort_0(node,tmp);
-    }
-    private static SingleLinkNode quickSort_0(SingleLinkNode head,SingleLinkNode tail) {
-        System.out.println("---------------------------------");
-        if(head==null||tail==null||head==tail)
-           return null;
-        int midVal=head.val;
-        //辅助节点
-        SingleLinkNode begin=new SingleLinkNode(-1);
-        begin.next=head;
-        SingleLinkNode midNode=head;
-        SingleLinkNode node=head.next;
-        SingleLinkNode preNode=node;
-        while(node!=null){
-            if(node.val<midNode.val){
-                //断开node节点
-                    preNode.next = node.next;
-                    //放入midNode的左边
-                    node.next = begin.next;
-                    begin.next = node;
-                    node = preNode.next;
-            }else {
-                preNode = node;
+    @Test
+    public void check(){
+        for(int i=0;i<100;i++) {
+            ListNode node = SortUtil.randomLinkSort(i);
+            LinkedList<ListNode> l = SortUtil.toLinkedList(node);
+            node = sortList(node);
+            int index = 0;
+            while (node != null) {
+                Assert.assertEquals(node.val, l.get(index).val);
+                index++;
                 node = node.next;
             }
-            print(begin);
         }
-        quickSort_0(begin.next,midNode);
-        if(midNode!=null)
-           quickSort_0(midNode.next,tail);
-       return begin.next;
     }
 
-    //单链表的插入排序
-    public static SingleLinkNode insertSort(SingleLinkNode head) {
-        SingleLinkNode newLinkHead = head;
-        SingleLinkNode prev = head;
-        SingleLinkNode cur = prev.next;
-        while (cur != null) {
-            if (cur.val >= prev.val) {
-                prev = cur;
-                cur = cur.next;
-            } else {
-                SingleLinkNode node = newLinkHead;
-                SingleLinkNode preNode = null;
-                while (node.val < cur.val) {
-                    preNode = node;
-                    node = node.next;
-                    prev.next = cur.next;
-                    //将cur插入到preNode和node之间
-                    cur.next = node;
-                    if (preNode != null)
-                        preNode.next = cur;
-                    if (node.val == newLinkHead.val)
-                        newLinkHead = cur;
-                    cur = prev.next;
-                }
-            }
+
+    public ListNode sortList(ListNode head) {
+        if (head == null || head.next == null) return head;
+        ListNode slow = head, fast = head, pre = head;
+        while (fast != null && fast.next != null) {
+            pre = slow;
+            slow = slow.next;
+            fast = fast.next.next;
         }
-        return newLinkHead;
+        pre.next = null;
+        return merge(sortList(head), sortList(slow));
     }
+
+    public ListNode merge(ListNode l1, ListNode l2) {
+        if(l1==null)return l2;
+        if(l2==null)return l1;
+        if(l1.val>l2.val){
+            l2.next=merge(l1,l2.next);
+            return l2;
+        }else{
+            l1.next=merge(l1.next,l2);
+            return l1;
+        }
+    }
+
+   /* public ListNode merge(ListNode l1, ListNode l2) {
+        ListNode dummy = new ListNode(-1);
+        ListNode cur = dummy;
+        while (l1 != null && l2 != null) {
+            if (l1.val < l2.val) {
+                cur.next = l1;
+                l1 = l1.next;
+            } else {
+                cur.next = l2;
+                l2 = l2.next;
+            }
+            cur = cur.next;
+        }
+        if (l1 != null) cur.next = l1;
+        if (l2 != null) cur.next = l2;
+        return dummy.next;
+    }
+*/
 }
