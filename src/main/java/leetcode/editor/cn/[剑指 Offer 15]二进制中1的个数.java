@@ -33,7 +33,9 @@ class ErJinZhiZhong1deGeShuLcof{
       }
  //leetcode submit region begin(Prohibit modification and deletion)
 public class Solution {
-
+    // >>> 是无符号的右移  最左边永远补0
+     // >>带符号的右移  如果是负数 最左边永远补1
+     // 该题 要用>>> 而不能用>> 否则就会死循环
     // you need to treat n as an unsigned value
     public int hammingWeight(int n) {
         int count=0;
