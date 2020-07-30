@@ -51,7 +51,7 @@ public class HeapSort {
         int heapSize=arr.length-1;
         while(heapSize>0) {
             int index=0;
-            swap(arr,index,heapSize--);
+            SortUtil.swap(arr,index,heapSize--);
             while(index<heapSize) {
                 int left = 2 * index + 1;
                 int right = left + 1;
@@ -63,7 +63,7 @@ public class HeapSort {
                     maxChildIndex=arr[left] > arr[right] ? left : right;
 
                 if (arr[maxChildIndex] > arr[index]) {
-                    swap(arr, maxChildIndex, index);
+                    SortUtil.swap(arr, maxChildIndex, index);
                 }
                 index=maxChildIndex;
             }
@@ -88,7 +88,7 @@ public class HeapSort {
         //如果父类小于自己则不断交换
         while(parentValue<value){
             //交换
-            swap(arr,index,parentIndex);
+            SortUtil.swap(arr,index,parentIndex);
             //交换完后将自己当成parentValue
             //注意不要写成value=parentValue,因为parentValue没因为swap(arr,index,parentIndex)改变
             value=arr[parentIndex];
@@ -101,11 +101,7 @@ public class HeapSort {
         }
     }
 
-    private static void swap(int[] arr, int i, int j) {
-        int tmp=arr[i];
-        arr[i]=arr[j];
-        arr[j]=tmp;
-    }
+
 
 
 }

@@ -30,6 +30,9 @@ public class LRUCache_shouxieTest {
         Assert.assertEquals("10,9,8,7,3",lruCache.print());
         lruCache.put(3,11);
         Assert.assertEquals("11,10,9,8,7",lruCache.print());
+        lruCache.put(12,12);
+        Assert.assertEquals("12," +
+                "11,10,9,8",lruCache.print());
     }
 
 }
