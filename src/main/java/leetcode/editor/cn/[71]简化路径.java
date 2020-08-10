@@ -49,18 +49,45 @@
 
 package leetcode.editor.cn;
 
-import java.util.Stack;
+import java.util.LinkedList;
 
+/**
+ * 解题思路：
+ * 使用 /分隔 字符串成字符串数组
+ * 使用LinekdList 是由于 LinekdList可以当队列也可以当列表
+ * 遇到 .. 就弹出
+ * 遇到 . 和 空就跳过
+ *
+ * 最后拼接在一起的时候要使用pollLast, 把LinkedList当成队列来使用
+ * poll()是从队首取出，相当于pop()
+ * 从队尾取则是pollLast()
+ */
 class SimplifyPath{
       public static void main(String[] args) {
            Solution solution = new SimplifyPath().new Solution();
       }
  //leetcode submit region begin(Prohibit modification and deletion)
 class Solution {
-   //  /a/./b/../../c/
-   //  /home/ ->/home
+
     public String simplifyPath(String path) {
-     return "";
+        String[] info = path.split("/");
+        LinkedList ll=new LinkedList();
+        for(String str:info){
+            if(str.equals("..")){
+                if(!ll.isEmpty())
+                   ll.pop();
+            }else if(str.equals(".") || str.equals("")) continue;
+            else{
+                ll.push(str);
+            }
+        }
+
+        StringBuilder builder=new StringBuilder("/");
+        while(!ll.isEmpty()){
+            builder.append(ll.pollLast());//从队尾获取
+            if(!ll.isEmpty()) builder.append("/");
+        }
+       return builder.toString();
     }
 }
 //leetcode submit region end(Prohibit modification and deletion)
