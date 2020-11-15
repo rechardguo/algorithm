@@ -44,14 +44,14 @@ class BinaryTreeZigzagLevelOrderTraversal_2 {
  */
 class Solution {
     public List<List<Integer>> zigzagLevelOrder(TreeNode root) {
-        List<List<Integer>> res=new ArrayList<>();
+        List<List<Integer>> res=new ArrayList<List<Integer>>();
         if(root==null) return res;
         Stack<TreeNode> s1= new Stack();
         Stack<TreeNode> s2= new Stack();
         s1.push(root);
         while(!s1.isEmpty() || !s2.isEmpty()) {
             if(!s1.isEmpty()){
-                List<Integer> l = new ArrayList<>();
+                List<Integer> l = new ArrayList();
                 while(s1.isEmpty()){
                     TreeNode node=s1.pop();
                     l.add(node.val);
