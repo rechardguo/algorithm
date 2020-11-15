@@ -43,7 +43,7 @@ public class JointNode {
                 return getNodeWhenEndNodeSame(head1, head2, node1Length, node2Length);
             }
 
-        } else if (!chain1HasLoop && !chain1HasLoop) {
+        } else if (!chain1HasLoop && !chain2HasLoop) {
             while (cur1.next != null)
                 cur1 = cur1.next;
             while (cur2.next != null)
