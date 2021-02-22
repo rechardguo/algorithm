@@ -38,20 +38,23 @@ class BinaryTreeInorderTraversal{
  */
 class Solution {
     public List<Integer> inorderTraversal(TreeNode root) {
-        List<Integer> list=new ArrayList<>();
-        Stack<TreeNode> stack=new Stack();
+
+        List<Integer> res=new ArrayList<>();
         TreeNode node=root;
-        while(node!=null || !stack.isEmpty()){
+        Stack<TreeNode> stack=new Stack();
+
+        while(node!=null||!stack.isEmpty()){
             if(node==null){
                 node=stack.pop();
-                list.add(node.val);
+                res.add(node.val);
                 node=node.right;
                 continue;
             }
             stack.push(node);
+            //res.add(node.val);
             node=node.left;
         }
-        return list;
+        return res;
     }
 }
 //leetcode submit region end(Prohibit modification and deletion)
