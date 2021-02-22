@@ -32,6 +32,7 @@
 package leetcode.editor.cn;
 
 import rechard.learn.algorithm.btree.TreeNode;
+import sun.reflect.generics.tree.Tree;
 
 class SymmetricTree{
       public static void main(String[] args) {
@@ -47,18 +48,24 @@ class SymmetricTree{
  *     TreeNode(int x) { val = x; }
  * }
  */
-class Solution {
+    /**
+     * 检查一棵二叉树是否是镜像
+     */
+    class Solution {
     public boolean isSymmetric(TreeNode root) {
         if(root==null) return true;
         return isSymmetric(root.left,root.right);
     }
-    public boolean isSymmetric(TreeNode t1,TreeNode t2) {
-        //比较当前节点是否对称
-        if (t1 == null && t2 == null) return true;
-        if (t1 == null || t2 == null) return false;
-        if (t1.val != t2.val) return false;
-        //当前节点对称，则比较left和 right
-        return isSymmetric(t1.left,t2.right) && isSymmetric(t1.right,t2.left);
+    public boolean isSymmetric(TreeNode left, TreeNode right) {
+        if(left==null && right==null)return true;
+        if((left!=null && right==null)||(left==null && right!=null))
+            return false;
+        if(left!=null && right!=null){
+            if(left.val!=right.val) return false;
+        }
+
+        return isSymmetric(left.left,right.right) &&
+               isSymmetric(left.right,right.left);
     }
 }
 //leetcode submit region end(Prohibit modification and deletion)
